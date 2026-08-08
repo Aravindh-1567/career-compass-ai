@@ -31,27 +31,27 @@ jobs:
         working-directory: frontend
         run: npm install
 
-      - name: Build React app
+      - name: Build Vite app
         working-directory: frontend
         run: npm run build
 
-      - name: Setup Pages
+      - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload website
-        uses: actions/upload-pages-artifact@v4
+      - name: Upload Vite build
+        uses: actions/upload-pages-artifact@v3
         with:
           path: frontend/dist
 
   deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
-    runs-on: ubuntu-latest
-    needs: build
-
     steps:
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
