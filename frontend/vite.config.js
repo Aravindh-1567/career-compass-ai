@@ -1,2 +1,8 @@
 import { defineConfig } from "vite";
-export default defineConfig({ server: { port: 5173 } });
+
+export default defineConfig({
+  base: "/career-compass-ai/",
+  server: {
+    port: 5173
+  }
+});
